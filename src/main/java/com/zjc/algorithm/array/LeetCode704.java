@@ -1,4 +1,4 @@
-package com.zjc.algorithm.simple;
+package com.zjc.algorithm.array;
 
 /**
  * @author : zoujianchao
