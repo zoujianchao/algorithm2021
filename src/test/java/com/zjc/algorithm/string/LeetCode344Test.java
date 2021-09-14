@@ -1,5 +1,9 @@
 package com.zjc.algorithm.string;
 
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author : zoujianchao
  * @version : 1.0
@@ -14,5 +18,9 @@ class LeetCode344Test {
             s[i] = s[j];
             s[j] = a;
         }
+    }
+    
+    public static void main(String[] args) {
+        List<Integer> a = Arrays.asList(1);
     }
 }
