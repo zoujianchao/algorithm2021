@@ -1,9 +1,6 @@
 package com.zjc.algorithm.tree;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author : zoujianchao
@@ -27,17 +24,37 @@ public class Leetcode94 {
 //        inorder(node.right, list);
 //    }
 
+//    public List<Integer> inorderTraversal(TreeNode root) {
+//        List<Integer> list = new ArrayList<>();
+//        Deque<TreeNode> deque = new LinkedList<>();
+//        while (!deque.isEmpty() || root != null) {
+//            while (root != null) {
+//                deque.push(root);
+//                root = root.left;
+//            }
+//            root = deque.pop();
+//            list.add(root.val);
+//            root = root.right;
+//        }
+//        return list;
+//    }
+    
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        Deque<TreeNode> deque = new LinkedList<>();
-        while (!deque.isEmpty() || root != null) {
-            while (root != null) {
-                deque.push(root);
-                root = root.left;
+        if (root == null) {
+            return list;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }else {
+                cur = stack.pop();
+                list.add(cur.val);
+                cur = cur.right;
             }
-            root = deque.pop();
-            list.add(root.val);
-            root = root.right;
         }
         return list;
     }

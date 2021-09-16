@@ -1,9 +1,6 @@
 package com.zjc.algorithm.tree;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author : zoujianchao
@@ -29,28 +26,49 @@ public class Leetcode145 {
 //    }
     
     //非递归
+//    public List<Integer> postorderTraversal(TreeNode root) {
+//        List<Integer> list = new ArrayList<>();
+//        if (root == null) {
+//            return list;
+//        }
+//        Deque<TreeNode> deque = new LinkedList<>();
+//        TreeNode pre = null;
+//        while (!deque.isEmpty() || root != null) {
+//            while (root != null) {
+//                deque.push(root);
+//                root = root.left;
+//            }
+//            root = deque.pop();
+//            if (root.right == null || root.right == pre) {
+//                list.add(root.val);
+//                pre = root;
+//                root = null;
+//            }else {
+//                deque.push(root);
+//                root = root.right;
+//            }
+//        }
+//        return list;
+//    }
+    
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root == null) {
             return list;
         }
-        Deque<TreeNode> deque = new LinkedList<>();
-        TreeNode pre = null;
-        while (!deque.isEmpty() || root != null) {
-            while (root != null) {
-                deque.push(root);
-                root = root.left;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node  = stack.pop();
+            list.add(node.val);
+            if (node.left != null) {
+                stack.push(node.left);
             }
-            root = deque.pop();
-            if (root.right == null || root.right == pre) {
-                list.add(root.val);
-                pre = root;
-                root = null;
-            }else {
-                deque.push(root);
-                root = root.right;
+            if (node.right != null) {
+                stack.push(node.right);
             }
         }
+        Collections.reverse(list);
         return list;
     }
 }

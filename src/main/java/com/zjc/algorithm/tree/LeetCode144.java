@@ -1,9 +1,6 @@
 package com.zjc.algorithm.tree;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author : zoujianchao
@@ -29,21 +26,41 @@ public class LeetCode144 {
 //    }
     
     //非递归
+//    public List<Integer> preorderTraversal(TreeNode root) {
+//        List<Integer> list = new ArrayList<>();
+//        if (root == null) {
+//            return list;
+//        }
+//        Deque<TreeNode> deque = new LinkedList<>();
+//        TreeNode node = root;
+//        while (!deque.isEmpty() || node != null) {
+//            while (node != null) {
+//                list.add(node.val);
+//                deque.push(node);
+//                node = node.left;
+//            }
+//            node = deque.pop();
+//            node = node.right;
+//        }
+//        return list;
+//    }
+    
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root == null) {
             return list;
         }
-        Deque<TreeNode> deque = new LinkedList<>();
-        TreeNode node = root;
-        while (!deque.isEmpty() || node != null) {
-            while (node != null) {
-                list.add(node.val);
-                deque.push(node);
-                node = node.left;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
             }
-            node = deque.pop();
-            node = node.right;
+            if (node.left != null) {
+                stack.push(node.left);
+            }
         }
         return list;
     }
